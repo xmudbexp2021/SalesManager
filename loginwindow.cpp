@@ -13,9 +13,10 @@ LoginWindow::LoginWindow(QWidget *parent) :
     connect(ui->exitButton, SIGNAL(clicked()), this, SLOT(onExitButtonClick()));
     connect(ui->settingButton, SIGNAL(clicked()), this, SLOT(onSettingButtonClick()));
 
-    // 连接数据库
+    // 数据库连接完成事件
     connect(&sqlThread, SIGNAL(connectDone(bool)), this, SLOT(onConnectDone(bool)));
 
+    // 连接数据库事件
     sqlThread.execute();
 }
 
