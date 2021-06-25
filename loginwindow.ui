@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginWindow</class>
+ <widget class="QMainWindow" name="LoginWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>575</width>
+    <height>169</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>登录</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="loginButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>20</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>登录</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exitButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>70</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>退出</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="settingButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>120</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>设置</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>63</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>用户名</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>331</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>80</y>
+      <width>63</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>密码</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>70</y>
+      <width>331</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>数据库地址：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dbAddrLabel">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>130</y>
+      <width>301</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>正在连接数据库...</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

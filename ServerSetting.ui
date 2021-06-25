@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ServerSetting</class>
+ <widget class="QMainWindow" name="ServerSetting">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>569</width>
+    <height>235</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>数据库服务器设置</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>431</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>数据库连接信息设置</string>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据库服务器：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="serverEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>30</y>
+       <width>281</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据库端口：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="portEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>60</y>
+       <width>281</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据库用户：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="userEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>90</y>
+       <width>281</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>120</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据库密码：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="passEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>120</y>
+       <width>281</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>150</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据库名称：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nameEdit">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>150</y>
+       <width>281</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="applyButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>20</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>应用</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cancelButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>60</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>取消</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
