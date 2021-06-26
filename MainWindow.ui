@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>商品销售管理系统</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background: #fff;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -23,13 +28,218 @@
       <height>561</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTabWidget::pane {
+        border: none;
+        background: transparent;
+}
+QTabWidget::tab-bar {
+        border: none;	
+}
+QTabBar::tab {
+		font-size:16px;
+        border: none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        color: rgb(0, 0, 0);
+        background: rgb(255, 255, 255, 30);
+        height: 28px;
+        min-width: 85px;
+        margin-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+}
+
+QTabBar::tab:hover {
+		color: 	#87CEEB;
+   		background: 		#F5F5F5;
+		border-bottom:4px solid #008B8B;
+}
+
+QTabBar::tab:selected {
+        color: rgb(0, 160, 230);
+		border-bottom:4px solid rgb(0, 160, 230);
+}
+</string>
+    </property>
     <property name="currentIndex">
      <number>0</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
+    </property>
+    <property name="documentMode">
+     <bool>false</bool>
+    </property>
+    <property name="tabsClosable">
+     <bool>false</bool>
+    </property>
+    <property name="movable">
+     <bool>false</bool>
     </property>
     <widget class="QWidget" name="goods">
      <attribute name="title">
       <string notr="true">商品信息</string>
      </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>搜索商品： </string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>10</y>
+        <width>321</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>等线 Light</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid gray;/*设置边框的粗细，以及颜色*/
+border-radius: 10px;/*设置圆角的大小*/
+padding: 0 8px;/*如果没有内容光标在开始往后移动0.8像素点*/
+selection-background-color: darkgray;
+   </string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="searchButton">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>10</y>
+        <width>75</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#searchButton {
+	background: #1890ff;
+	border: 0px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+#searchButton:hover {
+	background: rgb(64,169,255);
+}</string>
+      </property>
+      <property name="text">
+       <string>搜索</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addButton">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>10</y>
+        <width>75</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#addButton {
+	background:	#3CB371;
+	border: 0px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+#addButton:hover {
+	background:	#8FBC8F;
+}</string>
+      </property>
+      <property name="text">
+       <string>新增商品</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteButton">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>10</y>
+        <width>75</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#deleteButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#deleteButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
+      </property>
+      <property name="text">
+       <string>删除</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="resultTable">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>60</y>
+        <width>551</width>
+        <height>461</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTableView" name="typeTable">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>181</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="autoScrollMargin">
+       <number>25</number>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::SolidLine</enum>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>180</number>
+      </attribute>
+     </widget>
     </widget>
     <widget class="QWidget" name="categories">
      <attribute name="title">
@@ -64,7 +274,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
