@@ -245,6 +245,99 @@ selection-background-color: darkgray;
      <attribute name="title">
       <string notr="true">分类管理</string>
      </attribute>
+     <widget class="QTableView" name="typeManagerTable">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>671</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="newButton">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>50</y>
+        <width>91</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#newButton {
+	background: #1890ff;
+	border: 0px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+#newButton:hover {
+	background: rgb(64,169,255);
+}</string>
+      </property>
+      <property name="text">
+       <string>新建分类</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="alterButton">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>100</y>
+        <width>91</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#alterButton {
+	background: white;
+	border: 0px;
+ 	border:2px solid #D3D3D3;
+	border-radius: 3px;
+	color: black;
+}
+
+#alterButton:hover {
+	background:	#D3D3D3;
+}</string>
+      </property>
+      <property name="text">
+       <string>修改分类信息</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="dropButton">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>150</y>
+        <width>91</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#dropButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#dropButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
+      </property>
+      <property name="text">
+       <string>删除分类</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="users">
      <attribute name="title">
