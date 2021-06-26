@@ -69,7 +69,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -90,7 +90,7 @@ QTabBar::tab:selected {
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>10</y>
         <width>101</width>
         <height>31</height>
@@ -99,34 +99,11 @@ QTabBar::tab:selected {
       <property name="font">
        <font>
         <family>微软雅黑</family>
-        <pointsize>16</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
        <string>搜索商品： </string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textEdit">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>10</y>
-        <width>321</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>等线 Light</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border: 1px solid gray;/*设置边框的粗细，以及颜色*/
-border-radius: 10px;/*设置圆角的大小*/
-padding: 0 8px;/*如果没有内容光标在开始往后移动0.8像素点*/
-selection-background-color: darkgray;
-   </string>
       </property>
      </widget>
      <widget class="QPushButton" name="searchButton">
@@ -214,6 +191,12 @@ selection-background-color: darkgray;
         <height>461</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QTableView" name="typeTable">
       <property name="geometry">
@@ -227,7 +210,7 @@ selection-background-color: darkgray;
       <property name="font">
        <font>
         <family>微软雅黑</family>
-        <pointsize>16</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="autoScrollMargin">
@@ -239,6 +222,23 @@ selection-background-color: darkgray;
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>180</number>
       </attribute>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>10</y>
+        <width>331</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid gray;/*设置边框的粗细，以及颜色*/
+border-radius: 5px;/*设置圆角的大小*/
+padding: 0 8px;/*如果没有内容光标在开始往后移动0.8像素点*/
+selection-background-color: darkgray;
+   </string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="categories">
@@ -412,7 +412,7 @@ selection-background-color: darkgray;
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
