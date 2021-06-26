@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "application.h"
 namespace Ui {
 class MainWindow;
 }
@@ -14,6 +14,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void refreshTypeTable(QSqlQueryModel *model);
+    void refreshResultTable(QSqlQueryModel *model);
+    void refreshTypeManagerTable(QSqlQueryModel *model);
+    void refreshUserTable(QSqlQueryModel *model);
+    void setupTables();
 
 private:
     Ui::MainWindow *ui;
