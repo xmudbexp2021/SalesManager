@@ -1,6 +1,8 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "AddGoodItem.h"
+
 int loginUserID;
 int loginUserRole;
 QString loginUserName;
@@ -26,7 +28,8 @@ void MainWindow::onSearchButtonClick()
 
 void MainWindow::onAddButtonClick()
 {
-
+    AddGoodItem* widget = new AddGoodItem();
+    widget->show();
 }
 
 void MainWindow::onDeleteButtonClick()
