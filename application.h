@@ -25,4 +25,11 @@ extern int databasePort;
 // 建立 SQL 数据库连接 (SQL.cpp)
 bool connectDatabase();
 
+// 用户信息
+extern int loginUserID;
+extern int loginUserRole;
+extern QString loginUserName;
+
+// 创建提示框
+void createMessageBox(QString content);
 #endif

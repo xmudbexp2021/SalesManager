@@ -1,6 +1,8 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 
+#include "MainWindow.h"
+
 #include "application.h"
 
 LoginWindow::LoginWindow(QWidget *parent) :
@@ -45,7 +47,7 @@ void LoginWindow::onLoginButtonClick()
     QString password = ui->passwordEdit->text();
 
     if (username.length() == 0 || password.length() == 0) {
-        QMessageBox::information(NULL, "提示", "用户名和密码不能为空！", QMessageBox::Yes, QMessageBox::Yes);
+        createMessageBox("用户名和密码不能为空！");
         return;
     }
 
@@ -74,8 +76,6 @@ void LoginWindow::onLoginButtonClick()
         qDebug() << "MD5 of password inputed: " << inputMd5;
 
         if (passwordMd5 == inputMd5) {
-            QMessageBox::information(NULL, "提示", "登录成功！", QMessageBox::Yes, QMessageBox::Yes);
-
             // 更新上次登录时间
             QDateTime currentTime = QDateTime::currentDateTime();
             QString currentTimeString = currentTime.toString("yyyy-MM-dd hh:mm:ss");
@@ -84,13 +84,21 @@ void LoginWindow::onLoginButtonClick()
             lastLogin.addBindValue(currentTimeString);
             lastLogin.addBindValue(uid);
             lastLogin.exec();
+
+            // 设置用户信息
+
+            // 跳转到新页面，同时关闭自己
+            MainWindow* mainWindow = new MainWindow();
+            mainWindow->show();
+            this->close();
+
         } else {
-            QMessageBox::information(NULL, "提示", "密码错误，拒绝登录！", QMessageBox::Yes, QMessageBox::Yes);
+            createMessageBox("密码错误，拒绝登录！");
         }
     }
     // 用户不存在
     else {
-        QMessageBox::information(NULL, "提示", "用户 " + username + " 不存在！", QMessageBox::Yes, QMessageBox::Yes);
+        createMessageBox("用户 " + username + " 不存在！");
     }
 
 }
