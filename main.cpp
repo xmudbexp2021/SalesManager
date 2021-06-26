@@ -1,5 +1,5 @@
 #include "loginwindow.h"
-#include "MainWindow.h"
+#include "AddGoodItem.h"
 
 #include "application.h"
 
@@ -11,12 +11,15 @@ int main(int argc, char *argv[])
     app = new QApplication(argc, argv);
 
     // 启动程序时，显示登录窗口
+    /*
     LoginWindow w;
     w.show();
+    */
 
-    // 暂时先跳到主窗口
-//    MainWindow w;
-//    w.show();
+    SQLThread thread;
+    thread.runSync();
+    AddGoodItem w(nullptr, "modify", 14);
+    w.show();
 
     return app->exec();
 }
