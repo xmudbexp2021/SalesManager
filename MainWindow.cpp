@@ -12,6 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //绑定按钮事件
+    connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(onSearchButtonClick()));
+    connect(ui->addButton, SIGNAL(clicked()), this, SLOT(onAddButtonClick()));
+    connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButtonClick()));
 }
 
 MainWindow::~MainWindow()
