@@ -11,6 +11,7 @@ public:
     explicit SQLThread(QObject *parent = nullptr) {};
     void execute();
     void terminate();
+    void runSync() { connect(); }
 
 protected:
     void run();

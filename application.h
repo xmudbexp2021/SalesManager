@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QThread>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QStandardItemModel>
 #include <QJsonDocument>
 #include <QtSql>
 

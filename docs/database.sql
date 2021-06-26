@@ -44,7 +44,7 @@ CREATE TABLE goods (
     subtitle NCHAR(200),
     inventory INT,
     restock_value FLOAT,
-    selling_vallue FLOAT,
+    selling_value FLOAT,
     length FLOAT,
     width FLOAT,
     height FLOAT,
@@ -61,7 +61,6 @@ CREATE TABLE pictures (
     pid INT NOT NULL AUTO_INCREMENT,
     gid INT,
     pictures TEXT,
-    description NCHAR(100),
 
     PRIMARY KEY(pid),
     FOREIGN KEY(gid) REFERENCES goods(gid)
