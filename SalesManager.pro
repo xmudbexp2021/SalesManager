@@ -16,18 +16,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    MainWindow.cpp \
     SQLThread.cpp \
     ServerSetting.cpp \
     loginwindow.cpp \
-    main.cpp
+    main.cpp \
+    utility.cpp
 
 HEADERS += \
+    MainWindow.h \
     SQLThread.h \
     ServerSetting.h \
     application.h \
     loginwindow.h
 
 FORMS += \
+    MainWindow.ui \
     ServerSetting.ui \
     loginwindow.ui
 
