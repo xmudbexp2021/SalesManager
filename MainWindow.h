@@ -16,6 +16,9 @@ public:
     ~MainWindow();
     void refreshTypeTable(QSqlQueryModel *model);
     void refreshResultTable(QSqlQueryModel *model);
+    void refreshTypeManagerTable(QSqlQueryModel *model);
+    void refreshUserTable(QSqlQueryModel *model);
+    void setupTables();
 
 private:
     Ui::MainWindow *ui;
