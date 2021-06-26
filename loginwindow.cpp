@@ -11,6 +11,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
 
     // 绑定按钮事件
     connect(ui->exitButton, SIGNAL(clicked()), this, SLOT(onExitButtonClick()));
+    connect(ui->loginButton, SIGNAL(clicked()), this, SLOT(onLoginButtonClick()));
     connect(ui->settingButton, SIGNAL(clicked()), this, SLOT(onSettingButtonClick()));
 
     // 数据库连接完成事件
@@ -39,6 +40,58 @@ void LoginWindow::onExitButtonClick()
  */
 void LoginWindow::onLoginButtonClick()
 {
+    // 获取用户名密码输入
+    QString username = ui->usernameEdit->text();
+    QString password = ui->passwordEdit->text();
+
+    if (username.length() == 0 || password.length() == 0) {
+        QMessageBox::information(NULL, "提示", "用户名和密码不能为空！", QMessageBox::Yes, QMessageBox::Yes);
+        return;
+    }
+
+    // 查找是否存在用户
+    QSqlQuery query;
+    query.prepare("SELECT password, uid FROM users WHERE username = ?");
+    query.addBindValue(username);
+    query.exec();
+
+    // 用户存在，则验证密码
+    if (query.next()) {
+        int uid = query.value(1).toInt();
+
+        // 计算密码的 MD5
+        QString passwordMd5 = query.value(0).toString(),
+                inputMd5;
+
+        QByteArray tmp, res;
+        QCryptographicHash hash(QCryptographicHash::Md5);
+        tmp.append(password);
+        hash.addData(tmp);
+        res = hash.result();
+        inputMd5 = res.toHex();
+
+        qDebug() << "MD5 of password in DB: " << passwordMd5;
+        qDebug() << "MD5 of password inputed: " << inputMd5;
+
+        if (passwordMd5 == inputMd5) {
+            QMessageBox::information(NULL, "提示", "登录成功！", QMessageBox::Yes, QMessageBox::Yes);
+
+            // 更新上次登录时间
+            QDateTime currentTime = QDateTime::currentDateTime();
+            QString currentTimeString = currentTime.toString("yyyy-MM-dd hh:mm:ss");
+            QSqlQuery lastLogin;
+            lastLogin.prepare("UPDATE users SET last_login = ? WHERE uid = ?");
+            lastLogin.addBindValue(currentTimeString);
+            lastLogin.addBindValue(uid);
+            lastLogin.exec();
+        } else {
+            QMessageBox::information(NULL, "提示", "密码错误，拒绝登录！", QMessageBox::Yes, QMessageBox::Yes);
+        }
+    }
+    // 用户不存在
+    else {
+        QMessageBox::information(NULL, "提示", "用户 " + username + " 不存在！", QMessageBox::Yes, QMessageBox::Yes);
+    }
 
 }
 

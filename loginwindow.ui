@@ -7,11 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>575</width>
-    <height>169</height>
+    <height>145</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>登录</string>
+   <string>商品信息管理系统 - 登录</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background: #fff;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="loginButton">
@@ -23,6 +28,23 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#loginButton {
+	background: #1890ff;
+	border: 0px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+#loginButton:hover {
+	background: rgb(64,169,255);
+}</string>
+    </property>
     <property name="text">
      <string>登录</string>
     </property>
@@ -31,10 +53,27 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>70</y>
+      <y>60</y>
       <width>85</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#exitButton {
+	background: #fff;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+}
+
+#exitButton:hover {
+	color: #40a9ff;
+	border: 1px solid #40a9ff;
+}</string>
     </property>
     <property name="text">
      <string>退出</string>
@@ -44,10 +83,27 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>120</y>
+      <y>100</y>
       <width>85</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#settingButton {
+	background: #fff;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+}
+
+#settingButton:hover {
+	color: #40a9ff;
+	border: 1px solid #40a9ff;
+}</string>
     </property>
     <property name="text">
      <string>设置</string>
@@ -62,11 +118,17 @@
       <height>14</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>用户名</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="usernameEdit">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -75,54 +137,69 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	border: 1px solid #d9d9d9;
+}
+QLineEdit:focus {
+	border: 1px solid #40a9ff;
+}</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>80</y>
+      <y>70</y>
       <width>63</width>
       <height>14</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>密码</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="passwordEdit">
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>70</y>
+      <y>60</y>
       <width>331</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+	border: 1px solid #d9d9d9;
+}
+QLineEdit:focus {
+	border: 1px solid #40a9ff;
+}</string>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>121</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>数据库地址：</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="dbAddrLabel">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>130</y>
-      <width>301</width>
+      <x>20</x>
+      <y>110</y>
+      <width>391</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>8</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>正在连接数据库...</string>
