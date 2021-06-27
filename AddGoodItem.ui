@@ -47,7 +47,7 @@ QPushButton:hover{
      <rect>
       <x>30</x>
       <y>10</y>
-      <width>121</width>
+      <width>201</width>
       <height>31</height>
      </rect>
     </property>
@@ -73,7 +73,7 @@ QPushButton:hover{
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -96,16 +96,16 @@ QPushButton:hover{
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>320</x>
       <y>60</y>
-      <width>51</width>
+      <width>61</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -128,7 +128,7 @@ QPushButton:hover{
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>350</x>
       <y>140</y>
       <width>81</width>
       <height>21</height>
@@ -137,7 +137,7 @@ QPushButton:hover{
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -160,7 +160,7 @@ QPushButton:hover{
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>100</y>
       <width>61</width>
       <height>21</height>
@@ -192,7 +192,7 @@ QPushButton:hover{
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>350</x>
       <y>100</y>
       <width>71</width>
       <height>21</height>
@@ -201,7 +201,7 @@ QPushButton:hover{
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -224,7 +224,7 @@ QPushButton:hover{
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>50</x>
       <y>140</y>
       <width>41</width>
       <height>21</height>
@@ -233,7 +233,7 @@ QPushButton:hover{
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -285,7 +285,7 @@ QComboBox::down-arrow {
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -308,16 +308,16 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>180</y>
-      <width>51</width>
+      <width>61</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -353,16 +353,16 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>320</x>
       <y>180</y>
-      <width>51</width>
+      <width>61</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -372,7 +372,7 @@ QComboBox::down-arrow {
    <widget class="QLineEdit" name="lengthEdit">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>90</x>
       <y>220</y>
       <width>111</width>
       <height>21</height>
@@ -385,16 +385,16 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>220</y>
-      <width>61</width>
+      <width>71</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -417,16 +417,16 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>240</x>
       <y>220</y>
-      <width>61</width>
+      <width>71</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -449,16 +449,16 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>460</x>
       <y>220</y>
-      <width>61</width>
+      <width>71</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -490,7 +490,7 @@ QComboBox::down-arrow {
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">
@@ -500,8 +500,8 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>265</y>
+      <x>30</x>
+      <y>260</y>
       <width>141</width>
       <height>21</height>
      </rect>
@@ -619,7 +619,7 @@ QComboBox::down-arrow {
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>10</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="text">

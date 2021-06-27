@@ -53,7 +53,7 @@ void LoginWindow::onLoginButtonClick()
 
     // 查找是否存在用户
     QSqlQuery query;
-    query.prepare("SELECT password, uid FROM users WHERE username = ?");
+    query.prepare("SELECT password, uid, username, role FROM users WHERE username = ?");
     query.addBindValue(username);
     query.exec();
 
@@ -86,6 +86,9 @@ void LoginWindow::onLoginButtonClick()
             lastLogin.exec();
 
             // 设置用户信息
+            loginUserID = uid;
+            loginUserName = query.value(2).toString();
+            loginUserRole = query.value(3).toUInt();
 
             // 跳转到新页面，同时关闭自己
             MainWindow* mainWindow = new MainWindow();
