@@ -38,6 +38,8 @@ private:
     void getImages(int gid);            // 获取商品图片
     void processImageUpload(int gid);   // 处理当前的图片上传
 
+signals:
+    void tableChanged();
 
 public slots:
     void onUploadButtonClick();         // 上传按钮点击事件

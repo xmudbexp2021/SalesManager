@@ -211,8 +211,6 @@ void AddGoodItem::onDeleteButtonClick()
             QModelIndex index = selection.at(i);
             int colId = index.column();
 
-            qDebug() << "colId: " << colId;
-
             QSqlQuery query;
             // 删除的是尚未上传的图片
             if (colId >= (int)colToPid.size()) {
@@ -222,8 +220,6 @@ void AddGoodItem::onDeleteButtonClick()
             }
             // 删除的是已经上传的图片
             else {
-                qDebug() << "delete image pid = " << colToPid[colId];
-
                 QSqlQuery query;
                 query.prepare("DELETE FROM pictures WHERE pid = ?");
                 query.addBindValue(colToPid[colId]);
@@ -351,7 +347,10 @@ void AddGoodItem::onSaveButtonClick()
 
         processImageUpload(gid);
         createMessageBox("修改商品信息成功！");
+        QWidget::close();
     }
+
+    emit tableChanged();
 }
 
 /* 处理图片上传 */
