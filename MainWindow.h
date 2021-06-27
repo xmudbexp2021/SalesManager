@@ -22,6 +22,8 @@ public:
     void refreshResultTable(QSqlQueryModel *model);
     void refreshTypeManagerTable(QSqlQueryModel *model);
     void refreshUserTable(QSqlQueryModel *model);
+    void refreshSaleTable(QSqlQueryModel *model);
+    void refreshStockTable(QSqlQueryModel *model);
     void setupTables();
 
 private:
@@ -33,7 +35,6 @@ public slots:
     void onDeleteButtonClick();        // 删除按钮点击事件
     void onEditButtonClick();          // 编辑按钮点击事件
     void onClearFilterButtonClick();   // 清除过滤器点击事件
-
     void onApplyCategoryFilter(const QModelIndex& index);       // 点击类别的 TableView，应用分类器
     void onTableChanged();             // 表格数据变更，触发重新渲染
 };
