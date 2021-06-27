@@ -69,7 +69,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -313,7 +313,7 @@ selection-background-color: darkgray;
         <x>10</x>
         <y>10</y>
         <width>701</width>
-        <height>501</height>
+        <height>511</height>
        </rect>
       </property>
       <property name="font">
@@ -323,7 +323,7 @@ selection-background-color: darkgray;
        </font>
       </property>
      </widget>
-     <widget class="QPushButton" name="newButton">
+     <widget class="QPushButton" name="newCategoryButton">
       <property name="geometry">
        <rect>
         <x>730</x>
@@ -333,14 +333,14 @@ selection-background-color: darkgray;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">#newButton {
+       <string notr="true">#newCategoryButton {
 	background: #1890ff;
 	border: 0px;
 	border-radius: 3px;
 	color: #fff;
 }
 
-#newButton:hover {
+#newCategoryButton:hover {
 	background: rgb(64,169,255);
 }</string>
       </property>
@@ -348,7 +348,7 @@ selection-background-color: darkgray;
        <string>新建分类</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="alterButton">
+     <widget class="QPushButton" name="alterCategoryButton">
       <property name="geometry">
        <rect>
         <x>730</x>
@@ -358,7 +358,7 @@ selection-background-color: darkgray;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">#alterButton {
+       <string notr="true">#alterCategoryButton {
 	background: white;
 	border: 0px;
  	border:2px solid #D3D3D3;
@@ -366,7 +366,7 @@ selection-background-color: darkgray;
 	color: black;
 }
 
-#alterButton:hover {
+#alterCategoryButton:hover {
 	background:	#D3D3D3;
 }</string>
       </property>
@@ -374,7 +374,7 @@ selection-background-color: darkgray;
        <string>修改分类信息</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="dropButton">
+     <widget class="QPushButton" name="dropCategoryButton">
       <property name="geometry">
        <rect>
         <x>730</x>
@@ -384,14 +384,14 @@ selection-background-color: darkgray;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">#dropButton {
+       <string notr="true">#dropCategoryButton {
 	color:#FF4500;
 	background:	white;
  	border:2px solid #FF4500;
 	border-radius: 3px;
 }
 
-#dropButton:hover {
+#dropCategoryButton:hover {
 	background:	#FF4500;
 	color:white;
 }</string>
@@ -509,7 +509,7 @@ selection-background-color: darkgray;
      <x>0</x>
      <y>0</y>
      <width>854</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
