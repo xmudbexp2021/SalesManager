@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>dropdown.png</file>
+    </qresource>
+</RCC>
