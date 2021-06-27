@@ -10,18 +10,52 @@
     <height>584</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+    <pointsize>14</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>新建/修改商品信息</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background:white;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+border: 1px solid gray;/*设置边框的粗细，以及颜色*/
+border-radius: 5px;/*设置圆角的大小*/
+padding: 0 8px;/*如果没有内容光标在开始往后移动0.8像素点*/
+selection-background-color: darkgray;
+}
+
+QPushButton{
+	background: #1890ff;
+	border: 0px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+QPushButton:hover{
+	background: rgb(64,169,255);
+}</string>
+   </property>
    <widget class="QLabel" name="actionLabel">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>20</y>
-      <width>111</width>
-      <height>16</height>
+      <y>10</y>
+      <width>121</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>新建商品</string>
@@ -31,10 +65,16 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>63</y>
-      <width>63</width>
-      <height>14</height>
+      <y>60</y>
+      <width>51</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>商品 ID</string>
@@ -56,11 +96,17 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>63</y>
-      <width>63</width>
-      <height>14</height>
+      <x>330</x>
+      <y>60</y>
+      <width>51</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>商品编号</string>
@@ -69,9 +115,9 @@
    <widget class="QLineEdit" name="gnoEdit">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>390</x>
       <y>60</y>
-      <width>491</width>
+      <width>481</width>
       <height>21</height>
      </rect>
     </property>
@@ -82,11 +128,17 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>143</y>
-      <width>63</width>
-      <height>14</height>
+      <x>330</x>
+      <y>140</y>
+      <width>81</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>规格</string>
@@ -95,9 +147,9 @@
    <widget class="QLineEdit" name="skuEdit">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>390</x>
       <y>140</y>
-      <width>201</width>
+      <width>191</width>
       <height>21</height>
      </rect>
     </property>
@@ -108,11 +160,17 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>103</y>
-      <width>63</width>
-      <height>14</height>
+      <x>30</x>
+      <y>100</y>
+      <width>61</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>商品名称</string>
@@ -134,11 +192,17 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>103</y>
-      <width>63</width>
-      <height>14</height>
+      <x>330</x>
+      <y>100</y>
+      <width>71</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>描述</string>
@@ -147,9 +211,9 @@
    <widget class="QLineEdit" name="subtitleEdit">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>390</x>
       <y>100</y>
-      <width>491</width>
+      <width>481</width>
       <height>21</height>
      </rect>
     </property>
@@ -160,11 +224,17 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>143</y>
-      <width>31</width>
-      <height>16</height>
+      <x>30</x>
+      <y>140</y>
+      <width>41</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>分类</string>
@@ -179,15 +249,44 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 1px 2px 1px 2px; 
+    min-width: 9em; 
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+ 
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+ 
+QComboBox::down-arrow {
+    image: url(:/dropdown.png);
+}</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>143</y>
-      <width>63</width>
-      <height>14</height>
+      <x>620</x>
+      <y>140</y>
+      <width>41</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>库存量</string>
@@ -209,11 +308,17 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>183</y>
-      <width>63</width>
-      <height>14</height>
+      <x>30</x>
+      <y>180</y>
+      <width>51</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>进货价格</string>
@@ -235,9 +340,9 @@
    <widget class="QLineEdit" name="sellingValueEdit">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>390</x>
       <y>180</y>
-      <width>201</width>
+      <width>191</width>
       <height>21</height>
      </rect>
     </property>
@@ -248,11 +353,17 @@
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>183</y>
-      <width>63</width>
-      <height>14</height>
+      <x>330</x>
+      <y>180</y>
+      <width>51</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>出售价格</string>
@@ -261,7 +372,7 @@
    <widget class="QLineEdit" name="lengthEdit">
     <property name="geometry">
      <rect>
-      <x>88</x>
+      <x>100</x>
       <y>220</y>
       <width>111</width>
       <height>21</height>
@@ -274,11 +385,17 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>30</x>
       <y>220</y>
       <width>61</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>长度 (mm)</string>
@@ -287,7 +404,7 @@
    <widget class="QLineEdit" name="widthEdit">
     <property name="geometry">
      <rect>
-      <x>308</x>
+      <x>320</x>
       <y>220</y>
       <width>111</width>
       <height>21</height>
@@ -300,11 +417,17 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>250</x>
       <y>220</y>
       <width>61</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>宽度 (mm)</string>
@@ -313,7 +436,7 @@
    <widget class="QLineEdit" name="heightEdit">
     <property name="geometry">
      <rect>
-      <x>528</x>
+      <x>550</x>
       <y>220</y>
       <width>111</width>
       <height>21</height>
@@ -326,11 +449,17 @@
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>470</x>
       <y>220</y>
       <width>61</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>高度 (mm)</string>
@@ -352,11 +481,17 @@
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>620</x>
       <y>180</y>
-      <width>61</width>
+      <width>41</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>颜色</string>
@@ -365,11 +500,17 @@
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>260</y>
-      <width>91</width>
-      <height>16</height>
+      <x>40</x>
+      <y>265</y>
+      <width>141</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>商品展示图片</string>
@@ -384,6 +525,19 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">#uploadImageButton {
+	color:	#3CB371;
+	background:	white;
+ 	border:2px solid	#3CB371;
+	border-radius: 3px;
+}
+
+#uploadImageButton:hover {
+	background:		#3CB371;
+	color:white;
+}</string>
+    </property>
     <property name="text">
      <string>上传图片</string>
     </property>
@@ -396,6 +550,19 @@
       <width>85</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#deleteImageButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#deleteImageButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
     </property>
     <property name="text">
      <string>删除图片</string>
@@ -423,6 +590,19 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">#cancelButton {
+	color:	#778899;
+	background:	white;
+ 	border:2px solid 	#778899;
+	border-radius: 3px;
+}
+
+#cancelButton:hover {
+	background:		#778899;
+	color:white;
+}</string>
+    </property>
     <property name="text">
      <string>取消</string>
     </property>
@@ -432,9 +612,15 @@
      <rect>
       <x>700</x>
       <y>220</y>
-      <width>61</width>
+      <width>51</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>重量 (g)</string>

@@ -47,5 +47,6 @@ DISTFILES += \
     config.json
 
 RESOURCES += \
-    config.qrc
+    config.qrc \
+    dropdown.qrc
 
