@@ -1,5 +1,4 @@
 #include "loginwindow.h"
-#include "AddGoodItem.h"
 
 #include "application.h"
 
@@ -9,6 +8,11 @@ int main(int argc, char *argv[])
 {
     // 初始化 QT 窗口
     app = new QApplication(argc, argv);
+
+    /*
+    SQLThread t;
+    t.runSync();
+    */
 
     // 启动程序时，显示登录窗口
     LoginWindow w;

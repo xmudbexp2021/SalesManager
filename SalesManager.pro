@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     AddGoodItem.cpp \
+    GoodDetail.cpp \
     MainWindow.cpp \
     SQLThread.cpp \
     ServerSetting.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     AddGoodItem.h \
+    GoodDetail.h \
     MainWindow.h \
     SQLThread.h \
     ServerSetting.h \
@@ -34,6 +36,7 @@ HEADERS += \
 
 FORMS += \
     AddGoodItem.ui \
+    GoodDetail.ui \
     MainWindow.ui \
     ServerSetting.ui \
     loginwindow.ui

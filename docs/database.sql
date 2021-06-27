@@ -144,3 +144,6 @@ CREATE TRIGGER categoriesNumberUpdater AFTER UPDATE ON goods FOR EACH ROW
 
 -- 创建默认管理员用户, 用户名 admin, 密码 admin
 INSERT INTO users (username, password, role) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 0);
+
+-- 创建默认分类
+INSERT INTO categories (cid, name, number) VALUES (0, '未分类', 0);
