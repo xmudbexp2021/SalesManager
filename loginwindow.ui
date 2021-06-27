@@ -139,13 +139,14 @@
     </property>
     <property name="font">
      <font>
-      <family>黑体</family>
-      <pointsize>12</pointsize>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit {
 	border: 1px solid #d9d9d9;
+    padding: 0px 5px;
 }
 QLineEdit:focus {
 	border: 1px solid #40a9ff;
@@ -180,9 +181,16 @@ QLineEdit:focus {
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit {
 	border: 1px solid #d9d9d9;
+    padding: 0px 5px;
 }
 QLineEdit:focus {
 	border: 1px solid #40a9ff;

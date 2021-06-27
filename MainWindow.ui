@@ -69,7 +69,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -310,9 +310,9 @@ selection-background-color: darkgray;
      <widget class="QTableView" name="typeManagerTable">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>711</width>
+        <width>701</width>
         <height>501</height>
        </rect>
       </property>
@@ -408,10 +408,10 @@ selection-background-color: darkgray;
      <widget class="Line" name="line">
       <property name="geometry">
        <rect>
-        <x>373</x>
+        <x>390</x>
         <y>10</y>
         <width>20</width>
-        <height>531</height>
+        <height>501</height>
        </rect>
       </property>
       <property name="orientation">
@@ -421,10 +421,10 @@ selection-background-color: darkgray;
      <widget class="QTableView" name="userTable">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>40</y>
+        <x>10</x>
+        <y>50</y>
         <width>371</width>
-        <height>471</height>
+        <height>461</height>
        </rect>
       </property>
       <property name="font">
@@ -439,8 +439,8 @@ selection-background-color: darkgray;
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
+        <x>10</x>
+        <y>10</y>
         <width>111</width>
         <height>31</height>
        </rect>
