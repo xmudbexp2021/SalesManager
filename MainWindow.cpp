@@ -284,6 +284,34 @@ void MainWindow::refreshUserTable(QSqlQueryModel *model)
     ui->userTable->show();
 }
 
+void MainWindow::refreshSaleTable(QSqlQueryModel *model)
+{
+    model->setHeaderData(0,Qt::Horizontal,tr("售货编号"));
+    model->setHeaderData(1,Qt::Horizontal,tr("商品ID"));
+    model->setHeaderData(2,Qt::Horizontal,tr("操作用户ID"));
+    model->setHeaderData(3,Qt::Horizontal,tr("卖出数量"));
+    model->setHeaderData(4,Qt::Horizontal,tr("卖出价格"));
+    model->setHeaderData(5,Qt::Horizontal,tr("顾客姓名"));
+    model->setHeaderData(6,Qt::Horizontal,tr("联系方式"));
+    model->setHeaderData(7,Qt::Horizontal,tr("卖出时间"));
+    ui->saleTable->setModel(model);
+    ui->saleTable->show();
+}
+
+void MainWindow::refreshStockTable(QSqlQueryModel *model)
+{
+//    model->setHeaderData(0,Qt::Horizontal,tr("售货编号"));
+//    model->setHeaderData(1,Qt::Horizontal,tr("商品ID"));
+//    model->setHeaderData(2,Qt::Horizontal,tr("操作用户ID"));
+//    model->setHeaderData(3,Qt::Horizontal,tr("卖出数量"));
+//    model->setHeaderData(4,Qt::Horizontal,tr("卖出价格"));
+//    model->setHeaderData(5,Qt::Horizontal,tr("顾客姓名"));
+//    model->setHeaderData(6,Qt::Horizontal,tr("联系方式"));
+//    model->setHeaderData(7,Qt::Horizontal,tr("卖出时间"));
+    ui->stockTable->setModel(model);
+    ui->stockTable->show();
+}
+
 void MainWindow::setupTables()
 {
     //查询数据库中种类信息并刷新typeTable
@@ -305,4 +333,14 @@ void MainWindow::setupTables()
     QSqlQueryModel *modelUserFirst = new QSqlQueryModel;
     modelUserFirst->setQuery("select uid,username,role,phone,email,last_login from users");
     refreshUserTable(modelUserFirst);
+
+    //查询售卖信息并刷新 saleTable
+    QSqlQueryModel *modelSaleFirst = new QSqlQueryModel;
+    modelSaleFirst->setQuery("select * from goods_sellouts");
+    refreshSaleTable(modelSaleFirst);
+
+    //查询库存信息并刷新 stockTable
+    QSqlQueryModel *modelStockFirst = new QSqlQueryModel;
+    modelStockFirst->setQuery("select log_id,goods_logs.gid,title,subtitle,goods_logs.uid,username,case type when 1 then '进货' when 2 then '上架' when 3 then '下架' end,number,time from goods,goods_logs,users where goods.gid = goods_logs.gid and goods_logs.uid = users.uid");
+    refreshStockTable(modelStockFirst);
 }
