@@ -39,7 +39,8 @@ public slots:
     void onDetailButtonClick();        // 详情按钮点击事件
     void onApplyCategoryFilter(const QModelIndex& index);       // 点击类别的 TableView，应用分类器
     void onTableChanged();             // 表格数据变更，触发重新渲染
-
+    void onStockButtonClick();        //入库按钮点击事件
+    void onSellButtonClick();
     // 分类管理页面
     void onNewCategoryButtonClick();
     void onAlterCategoryButtonClick();

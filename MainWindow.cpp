@@ -3,6 +3,7 @@
 
 #include "AddGoodItem.h"
 #include "GoodDetail.h"
+#include "SellPage.h"
 
 int loginUserID;
 int loginUserRole;
@@ -18,15 +19,16 @@ MainWindow::MainWindow(QWidget *parent) :
     setupTables();
 
     // 绑定按钮事件
-    //// 商品管理页面
+    // 商品管理页面
     connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(onSearchButtonClick()));
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(onAddButtonClick()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButtonClick()));
     connect(ui->editButton, SIGNAL(clicked()), this, SLOT(onEditButtonClick()));
     connect(ui->clearFilterButton, SIGNAL(clicked()), this, SLOT(onClearFilterButtonClick()));
     connect(ui->detailButton, SIGNAL(clicked()), this, SLOT(onDetailButtonClick()));
-
-    //// 分类管理 页面
+    connect(ui->stockButton, SIGNAL(clicked()), this, SLOT(onStockButtonClick()));
+    connect(ui->sellButton, SIGNAL(clicked()), this, SLOT(onSellButtonClick()));
+    // 分类管理 页面
     connect(ui->newCategoryButton, SIGNAL(clicked()), this, SLOT(onNewCategoryButtonClick()));
     connect(ui->alterCategoryButton, SIGNAL(clicked()), this, SLOT(onAlterCategoryButtonClick()));
     connect(ui->dropCategoryButton, SIGNAL(clicked()), this, SLOT(onDropCategoryButtonClick()));
@@ -241,6 +243,56 @@ void MainWindow::onApplyCategoryFilter(const QModelIndex& index)
     refreshResultTable(filterModel);
 }
 
+/* 商品入库点击事件 */
+void MainWindow::onStockButtonClick()
+{
+    if (!ui->resultTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要至少从列表中选择一个商品来入库！");
+        return;
+    }
+    bool isOK,result = false;
+    int stockNumb = QInputDialog::getInt(NULL,"入库信息","输入入库数量",QLineEdit::Normal,0,30000,1,&isOK);
+    if (stockNumb <= 0){
+        createMessageBox("请输入正确的入库数");
+        return;
+    }
+    if(isOK)
+    {
+        QModelIndexList selection = ui->resultTable->selectionModel()->selectedRows();
+        int rowId = selection.at(0).row();
+        int gid = ui->resultTable->model()->data(ui->resultTable->model()->index(rowId,0)).toInt();
+        QSqlQuery queryLog;
+        queryLog.prepare("insert into goods_logs(gid, uid, type, number, time) values(?, ?, ?, ?, CURRENT_TIMESTAMP)");
+        queryLog.addBindValue(gid);
+        queryLog.addBindValue(loginUserID);
+        queryLog.addBindValue(1);
+        queryLog.addBindValue(stockNumb);
+        if (!queryLog.exec()) {
+            result = false;
+            qDebug() << queryLog.lastError();
+        }
+        result = true;
+    }
+    if(result)
+        createMessageBox("商品入库成功！");
+    setupTables();
+}
+
+/* 商品售卖点击事件 */
+void MainWindow::onSellButtonClick()
+{
+    if (!ui->resultTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要至少从列表中选择一个商品来售卖！");
+        return;
+    }
+    QModelIndexList selection = ui->resultTable->selectionModel()->selectedRows();
+    int rowId = selection.at(0).row();
+    int gid = ui->resultTable->model()->data(ui->resultTable->model()->index(rowId,0)).toInt();
+    sellPage* inputSellInfo = new sellPage(this,gid);
+    connect(inputSellInfo,SIGNAL(tableChanged()),this,SLOT(onTableChanged()));
+    inputSellInfo->show();
+}
+
 /* 表格更新信号槽 */
 void MainWindow::onTableChanged()
 {
@@ -379,7 +431,7 @@ void MainWindow::setupTables()
 
     //查询库存信息并刷新 stockTable
     QSqlQueryModel *modelStockFirst = new QSqlQueryModel;
-    modelStockFirst->setQuery("select log_id,goods_logs.gid,title,subtitle,goods_logs.uid,username,case type when 1 then '进货' when 2 then '上架' when 3 then '下架' end,number,time from goods,goods_logs,users where goods.gid = goods_logs.gid and goods_logs.uid = users.uid");
+    modelStockFirst->setQuery("select goods_logs.gid,title,subtitle,case type when 1 then '进货' when 2 then '上架' when 3 then '下架' end,number,goods_logs.uid,username,time from goods,goods_logs,users where goods.gid = goods_logs.gid and goods_logs.uid = users.uid");
     refreshStockTable(modelStockFirst);
 }
 
