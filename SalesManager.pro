@@ -1,4 +1,5 @@
 QT       += core gui sql concurrent
+RC_ICONS = appIcon.ico
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
