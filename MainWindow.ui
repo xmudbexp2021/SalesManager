@@ -302,6 +302,58 @@ selection-background-color: darkgray;
        <string>取消过滤</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="stockButton">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>450</y>
+        <width>75</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#stockButton {
+	background: #fff;
+	border: 2px solid 	#DEB887;
+	color:	#DEB887;
+	border-radius: 3px;
+}
+
+#stockButton:hover {
+	background:#DEB887;
+	color: #fff;
+}</string>
+      </property>
+      <property name="text">
+       <string>入库</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="sellButton">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>490</y>
+        <width>75</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#sellButton {
+	background: #fff;
+	border: 2px solid 	#32CD32;
+	color:	#32CD32;
+	border-radius: 3px;
+}
+
+#sellButton:hover {
+	background:#32CD32;
+	color: #fff;
+}</string>
+      </property>
+      <property name="text">
+       <string>售卖</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="categories">
      <attribute name="title">
@@ -580,7 +632,7 @@ selection-background-color: darkgray;
      <x>0</x>
      <y>0</y>
      <width>854</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

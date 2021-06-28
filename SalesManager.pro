@@ -20,6 +20,7 @@ SOURCES += \
     GoodDetail.cpp \
     MainWindow.cpp \
     SQLThread.cpp \
+    SellPage.cpp \
     ServerSetting.cpp \
     UserEdit.cpp \
     loginwindow.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     GoodDetail.h \
     MainWindow.h \
     SQLThread.h \
+    SellPage.h \
     ServerSetting.h \
     UserEdit.h \
     application.h \
@@ -40,6 +42,7 @@ FORMS += \
     AddGoodItem.ui \
     GoodDetail.ui \
     MainWindow.ui \
+    SellPage.ui \
     ServerSetting.ui \
     UserEdit.ui \
     loginwindow.ui
