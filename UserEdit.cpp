@@ -45,7 +45,7 @@ UserEdit::~UserEdit()
 void UserEdit::renderPermissionDomain()
 {
     // 数据表列表
-    vector<QString> tables = {"goods", "users", "categories", "goods_logs", "goods_sellouts", "pictures", "user_permissions", "users"};
+    vector<QString> tables = {"goods", "users", "categories", "goods_logs", "goods_sellouts", "pictures", "user_permissions", "discounts"};
 
     for (auto table : tables) {
         domain.push_back(table);
@@ -101,7 +101,7 @@ void UserEdit::onSavePermissionButtonClick()
     }
 
     // 获取当前选择的权限域和权限类型
-    int domainIndex = ui->permissionType->currentIndex();
+    int domainIndex = ui->permissionDomain->currentIndex();
     int typeIndex = ui->permissionType->currentIndex();
     int opIndex = ui->permisionOp->currentIndex();
 
@@ -145,6 +145,7 @@ void UserEdit::onSavePermissionButtonClick()
     query.addBindValue(domainName);
     query.addBindValue(typeName);
     query.addBindValue(!opIndex);
+    qDebug() << domainName << typeName << opIndex;
     if (!query.exec()) {
         qDebug() << query.lastError();
         return;
