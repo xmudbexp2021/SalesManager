@@ -5,10 +5,12 @@
 #include "GoodDetail.h"
 #include "UserEdit.h"
 #include "SellPage.h"
+#include "loginwindow.h"
+#include "DiscountEdit.h"
 
-int loginUserID;
-int loginUserRole;
-QString loginUserName;
+int loginUserID = -1;
+int loginUserRole = -1;
+QString loginUserName = "";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupTables();
 
     // 绑定按钮事件
-    // 商品管理页面
+    /// 商品管理页面
     connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(onSearchButtonClick()));
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(onAddButtonClick()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(onDeleteButtonClick()));
@@ -29,19 +31,36 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->detailButton, SIGNAL(clicked()), this, SLOT(onDetailButtonClick()));
     connect(ui->stockButton, SIGNAL(clicked()), this, SLOT(onStockButtonClick()));
     connect(ui->sellButton, SIGNAL(clicked()), this, SLOT(onSellButtonClick()));
-    // 分类管理 页面
+    connect(ui->createDiscountButton, SIGNAL(clicked()), this, SLOT(onCreateDiscountButtonClick()));
+
+    /// 分类管理 页面
     connect(ui->newCategoryButton, SIGNAL(clicked()), this, SLOT(onNewCategoryButtonClick()));
     connect(ui->alterCategoryButton, SIGNAL(clicked()), this, SLOT(onAlterCategoryButtonClick()));
     connect(ui->dropCategoryButton, SIGNAL(clicked()), this, SLOT(onDropCategoryButtonClick()));
 
-    //// 用户管理 页面
+    /// 用户管理 页面
     connect(ui->createUserButton, SIGNAL(clicked()), this, SLOT(onCreateUserButtonClick()));
     connect(ui->modifyUserButton, SIGNAL(clicked()), this, SLOT(onModifyUserButtonClick()));
     connect(ui->modifyPermissionButton, SIGNAL(clicked()), this, SLOT(onModifyUserButtonClick()));
     connect(ui->deleteUserButton, SIGNAL(clicked()), this, SLOT(onDeleteUserButtonClick()));
 
+    /// 售出信息 & 库存信息 页面
+    connect(ui->deleteSelloutButton, SIGNAL(clicked()), this, SLOT(onDeleteSelloutButtonClick()));
+    connect(ui->deleteLogButton, SIGNAL(clicked()), this, SLOT(onDeleteLogButtonClick()));
+
+    /// 折扣管理页面
+    connect(ui->modifyDiscountButton, SIGNAL(clicked()), this, SLOT(onModifyDiscountButtonClick()));
+    connect(ui->deleteDiscountButton, SIGNAL(clicked()), this, SLOT(onDeleteDiscountButtonClick()));
+
+    /// 菜单
+    connect(ui->menuLogout, SIGNAL(aboutToShow()), this, SLOT(logout()));
+    connect(ui->menuExit, SIGNAL(aboutToShow()), this, SLOT(exit()));
+
     // 绑定表格点击事件
     connect(ui->typeTable, SIGNAL(clicked(const QModelIndex&)), this, SLOT(onApplyCategoryFilter(const QModelIndex&)));
+
+    // 动态绑定属性
+    ui->menuCurrentUser->setTitle("当前登录用户：" + loginUserName);
 }
 
 MainWindow::~MainWindow()
@@ -99,6 +118,11 @@ void MainWindow::onSearchButtonClick()
 /* 添加按钮点击事件 */
 void MainWindow::onAddButtonClick()
 {
+    if (!hasPermission(loginUserID, "goods", "insert")) {
+        createMessageBox("您无权添加商品！");
+        return;
+    }
+
     AddGoodItem* addItemPage = new AddGoodItem(this);
 
     // 监听数据库信息变动事件
@@ -110,6 +134,11 @@ void MainWindow::onAddButtonClick()
 /* 编辑按钮点击事件 */
 void MainWindow::onEditButtonClick()
 {
+    if (!hasPermission(loginUserID, "goods", "edit")) {
+        createMessageBox("您无权编辑商品信息！");
+        return;
+    }
+
     if (!ui->resultTable->selectionModel()->hasSelection()) {
         createMessageBox("需要至少从列表中选择一个商品来编辑！");
         return;
@@ -134,8 +163,13 @@ void MainWindow::onEditButtonClick()
 /* 删除按钮点击事件 */
 void MainWindow::onDeleteButtonClick()
 {
+    if (!hasPermission(loginUserID, "goods", "delete")) {
+        createMessageBox("您无权删除商品！");
+        return;
+    }
+
     if (!ui->resultTable->selectionModel()->hasSelection()) {
-        createMessageBox("需要至少从列表中选择一个商品来编辑！");
+        createMessageBox("需要至少从列表中选择一个商品来删除！");
         return;
     }
 
@@ -252,13 +286,17 @@ void MainWindow::onApplyCategoryFilter(const QModelIndex& index)
 /* 商品入库点击事件 */
 void MainWindow::onStockButtonClick()
 {
+    if (!hasPermission(loginUserID, "goods_logs", "insert")) {
+        createMessageBox("您无权执行入库操作！");
+        return;
+    }
     if (!ui->resultTable->selectionModel()->hasSelection()) {
         createMessageBox("需要至少从列表中选择一个商品来入库！");
         return;
     }
-    bool isOK,result = false;
-    int stockNumb = QInputDialog::getInt(NULL,"入库信息","输入入库数量",QLineEdit::Normal,0,30000,1,&isOK);
-    if (stockNumb <= 0){
+    bool isOK, result = false;
+    int stockNumb = QInputDialog::getInt(NULL,"入库信息","输入入库数量",QLineEdit::Normal,0,30000,1, &isOK);
+    if (isOK && stockNumb <= 0){
         createMessageBox("请输入正确的入库数");
         return;
     }
@@ -287,6 +325,10 @@ void MainWindow::onStockButtonClick()
 /* 商品售卖点击事件 */
 void MainWindow::onSellButtonClick()
 {
+    if (!hasPermission(loginUserID, "goods_sellouts", "insert")) {
+        createMessageBox("您无权执行售卖操作！");
+        return;
+    }
     if (!ui->resultTable->selectionModel()->hasSelection()) {
         createMessageBox("需要至少从列表中选择一个商品来售卖！");
         return;
@@ -393,68 +435,109 @@ void MainWindow::refreshSaleTable(QSqlQueryModel *model)
     model->setHeaderData(6,Qt::Horizontal,tr("联系方式"));
     model->setHeaderData(7,Qt::Horizontal,tr("卖出时间"));
     ui->saleTable->setModel(model);
+    ui->saleTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->saleTable->verticalHeader()->hide();
     ui->saleTable->show();
 }
 
 void MainWindow::refreshStockTable(QSqlQueryModel *model)
 {
-//    model->setHeaderData(0,Qt::Horizontal,tr("售货编号"));
-//    model->setHeaderData(1,Qt::Horizontal,tr("商品ID"));
-//    model->setHeaderData(2,Qt::Horizontal,tr("操作用户ID"));
-//    model->setHeaderData(3,Qt::Horizontal,tr("卖出数量"));
-//    model->setHeaderData(4,Qt::Horizontal,tr("卖出价格"));
-//    model->setHeaderData(5,Qt::Horizontal,tr("顾客姓名"));
-//    model->setHeaderData(6,Qt::Horizontal,tr("联系方式"));
-//    model->setHeaderData(7,Qt::Horizontal,tr("卖出时间"));
+    model->setHeaderData(0, Qt::Horizontal, tr("记录ID"));
+    model->setHeaderData(1, Qt::Horizontal,tr("商品ID"));
+    model->setHeaderData(2, Qt::Horizontal,tr("商品名称"));
+    model->setHeaderData(3, Qt::Horizontal,tr("操作类型"));
+    model->setHeaderData(4, Qt::Horizontal,tr("操作数量"));
+    model->setHeaderData(5, Qt::Horizontal,tr("操作用户"));
+    model->setHeaderData(6, Qt::Horizontal,tr("操作时间"));
     ui->stockTable->setModel(model);
+    ui->stockTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->stockTable->verticalHeader()->hide();
     ui->stockTable->show();
+}
+
+
+void MainWindow::refreshDiscountTable(QSqlQueryModel *model)
+{
+    model->setHeaderData(0, Qt::Horizontal, tr("折扣记录ID"));
+    model->setHeaderData(1, Qt::Horizontal,tr("商品ID"));
+    model->setHeaderData(2, Qt::Horizontal,tr("商品名称"));
+    model->setHeaderData(3, Qt::Horizontal,tr("操作用户"));
+    model->setHeaderData(4, Qt::Horizontal,tr("开始时间"));
+    model->setHeaderData(5, Qt::Horizontal,tr("结束时间"));
+    model->setHeaderData(6, Qt::Horizontal,tr("折扣价格"));
+    ui->discountTable->setModel(model);
+    ui->discountTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->discountTable->verticalHeader()->hide();
+    ui->discountTable->show();
 }
 
 void MainWindow::setupTables()
 {
     //查询数据库中种类信息并刷新typeTable
-    QSqlQueryModel *modelTypeFirst = new QSqlQueryModel;
-    modelTypeFirst->setQuery("select name from categories");
-    refreshTypeTable(modelTypeFirst);
+    if (hasPermission(loginUserID, "categories", "select")) {
+        QSqlQueryModel *modelTypeFirst = new QSqlQueryModel;
+        modelTypeFirst->setQuery("select name from categories");
+        refreshTypeTable(modelTypeFirst);
+    }
 
     //查询goods表中各信息并刷新resultTable
-    QSqlQueryModel *modelResultFirst = new QSqlQueryModel;
-    modelResultFirst->setQuery("select gid, gno, title, name, sku, subtitle, "
-                               "inventory, restock_value, selling_value, "
-                               "length, width, height, weight, color "
-                               "from goods  left join categories on goods.cid = categories.cid");
-    refreshResultTable(modelResultFirst);
+    if (hasPermission(loginUserID, "goods", "select")) {
+        QSqlQueryModel *modelResultFirst = new QSqlQueryModel;
+        modelResultFirst->setQuery("select gid, gno, title, name, sku, subtitle, "
+                                   "inventory, restock_value, selling_value, "
+                                   "length, width, height, weight, color "
+                                  "from goods  left join categories on goods.cid = categories.cid");
+        refreshResultTable(modelResultFirst);
+    }
 
     //查询种类信息并刷新typeManagerTable
-    QSqlQueryModel *modelTypeManagerFirst = new QSqlQueryModel;
-    modelTypeManagerFirst->setQuery("select cid, name, "
-                                    "(select count(*) from goods where goods.cid = categories.cid) as count, "
-                                    "(select sum(inventory) from goods where goods.cid = categories.cid) as sum, "
-                                    "(select avg(selling_value) from goods where goods.cid = categories.cid) as avg "
-                                    "from categories "
-                                    "order by cid asc");
-    refreshTypeManagerTable(modelTypeManagerFirst);
+    if (hasPermission(loginUserID, "categories", "select")) {
+        QSqlQueryModel *modelTypeManagerFirst = new QSqlQueryModel;
+        modelTypeManagerFirst->setQuery("select cid, name, "
+                                        "(select count(*) from goods where goods.cid = categories.cid) as count, "
+                                        "(select sum(inventory) from goods where goods.cid = categories.cid) as sum, "
+                                        "(select avg(selling_value) from goods where goods.cid = categories.cid) as avg "
+                                        "from categories "
+                                        "order by cid asc");
+        refreshTypeManagerTable(modelTypeManagerFirst);
+    }
 
     //查询用户信息并刷新userTable
-    QSqlQueryModel *modelUserFirst = new QSqlQueryModel;
-    modelUserFirst->setQuery("select uid, username, "
-                             "case role "
-                                "when 0 then '系统管理员' "
-                                "when 1 then '库存经理' "
-                                "when 2 then '人力资源经理' "
-                                "when 3 then '普通用户' end as roleStr, "
-                             "phone, email, last_login from users");
-    refreshUserTable(modelUserFirst);
+    if (hasPermission(loginUserID, "users", "select")) {
+        QSqlQueryModel *modelUserFirst = new QSqlQueryModel;
+        modelUserFirst->setQuery("select uid, username, "
+                                "case role "
+                                    "when 0 then '系统管理员' "
+                                    "when 1 then '库存经理' "
+                                    "when 2 then '人力资源经理' "
+                                    "when 3 then '普通用户' end as roleStr, "
+                                "phone, email, last_login from users");
+        refreshUserTable(modelUserFirst);
+    }
 
     //查询售卖信息并刷新 saleTable
-    QSqlQueryModel *modelSaleFirst = new QSqlQueryModel;
-    modelSaleFirst->setQuery("select * from goods_sellouts");
-    refreshSaleTable(modelSaleFirst);
+    if (hasPermission(loginUserID, "goods_sellouts", "select")) {
+        QSqlQueryModel *modelSaleFirst = new QSqlQueryModel;
+        modelSaleFirst->setQuery("select * from goods_sellouts");
+        refreshSaleTable(modelSaleFirst);
+    }
 
     //查询库存信息并刷新 stockTable
-    QSqlQueryModel *modelStockFirst = new QSqlQueryModel;
-    modelStockFirst->setQuery("select goods_logs.gid,title,subtitle,case type when 1 then '进货' when 2 then '上架' when 3 then '下架' end,number,goods_logs.uid,username,time from goods,goods_logs,users where goods.gid = goods_logs.gid and goods_logs.uid = users.uid");
-    refreshStockTable(modelStockFirst);
+    if (hasPermission(loginUserID, "goods_logs", "select")) {
+        QSqlQueryModel *modelStockFirst = new QSqlQueryModel;
+        modelStockFirst->setQuery("select log_id, goods_logs.gid,title,case type when 1 then '进货' when 2 then '上架' when 3 then '下架' end,number,username,time from goods,goods_logs,users where goods.gid = goods_logs.gid and goods_logs.uid = users.uid");
+        refreshStockTable(modelStockFirst);
+    }
+
+    // 查询折扣信息并刷新 discountTable
+    if (hasPermission(loginUserID, "discounts", "select"))  {
+        QSqlQueryModel *modelDiscount = new QSqlQueryModel;
+        modelDiscount->setQuery("SELECT did, discounts.gid, title, username, start_time, end_time, discount "
+                                "FROM discounts "
+                                "JOIN goods ON discounts.gid = goods.gid "
+                                "JOIN users ON discounts.uid = users.uid");
+        refreshDiscountTable(modelDiscount);
+    }
 }
 
 
@@ -464,6 +547,11 @@ void MainWindow::setupTables()
 /* 新建分类 */
 void MainWindow::onNewCategoryButtonClick()
 {
+    if (!hasPermission(loginUserID, "categories", "insert")) {
+        createMessageBox("您无权新建分类！");
+        return;
+    }
+
     bool isOK;
     QString categoryName = QInputDialog::getText(NULL, "新建分类", "请输入新分类的名称", QLineEdit::Normal, "", &isOK);
 
@@ -487,6 +575,10 @@ void MainWindow::onAlterCategoryButtonClick()
 {
     if (!ui->typeManagerTable->selectionModel()->hasSelection()) {
         createMessageBox("需要从列表中选择一个类来修改类信息！");
+        return;
+    }
+    if (!hasPermission(loginUserID, "categories", "update")) {
+        createMessageBox("您无权编辑分类！");
         return;
     }
 
@@ -520,6 +612,10 @@ void MainWindow::onDropCategoryButtonClick()
 {
     if (!ui->typeManagerTable->selectionModel()->hasSelection()) {
         createMessageBox("需要从列表中选择一个类删除！");
+        return;
+    }
+    if (!hasPermission(loginUserID, "categories", "delete")) {
+        createMessageBox("您无权删除分类！");
         return;
     }
 
@@ -559,6 +655,11 @@ void MainWindow::onDropCategoryButtonClick()
  */
 void MainWindow::onCreateUserButtonClick()
 {
+    if (!hasPermission(loginUserID, "users", "insert")) {
+        createMessageBox("您无权新建用户！");
+        return;
+    }
+
     UserEdit *userEditPage = new UserEdit(this, -1, "add");
     connect(userEditPage, SIGNAL(tableChanged()), this, SLOT(onTableChanged()));
     userEditPage->show();
@@ -566,6 +667,10 @@ void MainWindow::onCreateUserButtonClick()
 
 void MainWindow::onModifyUserButtonClick()
 {
+    if (!hasPermission(loginUserID, "users", "update")) {
+        createMessageBox("您无权修改用户！");
+        return;
+    }
     if (!ui->userTable->selectionModel()->hasSelection()) {
         createMessageBox("需要从列表中选择一个用户操作。");
         return;
@@ -587,15 +692,15 @@ void MainWindow::onDeleteUserButtonClick()
         return;
     }
 
+    if (!hasPermission(loginUserID, "users", "delete") != 1) {
+        createMessageBox("您无权删除用户！");
+        return;
+    }
+
     QModelIndexList selection = ui->userTable->selectionModel()->selectedRows();
 
     int rowId = selection.at(0).row();
     int uid = ui->userTable->model()->data(ui->userTable->model()->index(rowId, 0)).toInt();
-
-    if (hasPermission(loginUserID, "users", "delete") != 1) {
-        createMessageBox("您无权删除用户！");
-        return;
-    }
 
     QSqlQuery query;
     query.prepare("SELECT role FROM users WHERE uid = ?");
@@ -620,4 +725,140 @@ void MainWindow::onDeleteUserButtonClick()
 
         setupTables();
     }
+}
+
+void MainWindow::onDeleteSelloutButtonClick()
+{
+    if (!hasPermission(loginUserID, "goods_sellouts", "delete")) {
+        createMessageBox("您无权删除记录！");
+        return;
+    }
+    if (!ui->saleTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中至少选择一条记录删除！");
+        return;
+    }
+
+    QModelIndexList selection = ui->saleTable->selectionModel()->selectedRows();
+    QSqlQuery query;
+    for (int i = 0; i < selection.count(); i++) {
+        int rowId = selection.at(i).row();
+        int sid = ui->saleTable->model()->data(ui->saleTable->model()->index(rowId, 0)).toInt();
+        query.prepare("DELETE FROM goods_sellouts WHERE sid = ?");
+        query.addBindValue(sid);
+        if (!query.exec())
+            qDebug() << query.lastError();
+    }
+
+    createMessageBox("删除记录成功！");
+    setupTables();
+}
+
+void MainWindow::onDeleteLogButtonClick()
+{
+    if (!hasPermission(loginUserID, "goods_logs", "delete")) {
+        createMessageBox("您无权删除记录！");
+        return;
+    }
+    if (!ui->stockTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中至少选择一条记录删除！");
+        return;
+    }
+
+    QModelIndexList selection = ui->stockTable->selectionModel()->selectedRows();
+    QSqlQuery query;
+    for (int i = 0; i < selection.count(); i++) {
+        int rowId = selection.at(i).row();
+        int sid = ui->stockTable->model()->data(ui->saleTable->model()->index(rowId, 0)).toInt();
+        query.prepare("DELETE FROM goods_sellouts WHERE sid = ?");
+        query.addBindValue(sid);
+        if (!query.exec())
+            qDebug() << query.lastError();
+    }
+
+    createMessageBox("删除记录成功！");
+    setupTables();
+}
+
+/**
+ * 折扣页面
+ */
+void MainWindow::onCreateDiscountButtonClick()
+{
+    if (!hasPermission(loginUserID, "discounts", "insert")) {
+        createMessageBox("您无权添加折扣信息！");
+        return;
+    }
+    if (!ui->resultTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中选择一个商品来添加折扣！");
+        return;
+    }
+    QModelIndexList selection = ui->resultTable->selectionModel()->selectedRows();
+    int rowId = selection.at(0).row();
+    int gid = ui->resultTable->model()->data(ui->resultTable->model()->index(rowId, 0)).toInt();
+
+    DiscountEdit* discountPage = new DiscountEdit(this, "add", -1, gid);
+    connect(discountPage, SIGNAL(tableChanged()), this, SLOT(onTableChanged()));
+    discountPage->show();
+}
+
+void MainWindow::onModifyDiscountButtonClick()
+{
+    if (!hasPermission(loginUserID, "discounts", "update")) {
+        createMessageBox("您无权编辑折扣信息！");
+        return;
+    }
+    if (!ui->discountTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中选择一条记录编辑！");
+        return;
+    }
+    QModelIndexList selection = ui->discountTable->selectionModel()->selectedRows();
+    int rowId = selection.at(0).row();
+    int did = ui->discountTable->model()->data(ui->discountTable->model()->index(rowId, 0)).toInt();
+
+    DiscountEdit* discountPage = new DiscountEdit(this, "modify", did, -1);
+    connect(discountPage, SIGNAL(tableChanged()), this, SLOT(onTableChanged()));
+    discountPage->show();
+}
+
+void MainWindow::onDeleteDiscountButtonClick()
+{
+    if (!hasPermission(loginUserID, "discounts", "delete")) {
+        createMessageBox("您无权删除折扣信息！");
+        return;
+    }
+    if (!ui->discountTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中选择一条记录删除！");
+        return;
+    }
+    QModelIndexList selection = ui->discountTable->selectionModel()->selectedRows();
+    int rowId = selection.at(0).row();
+    int did = ui->discountTable->model()->data(ui->discountTable->model()->index(rowId, 0)).toInt();
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM discounts WHERE did = ?");
+    query.addBindValue(did);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return;
+    }
+    createMessageBox("折扣记录删除成功！");
+    setupTables();
+}
+
+// 注销当前用户
+void MainWindow::logout()
+{
+    loginUserID = -1;
+    loginUserRole = -1;
+    loginUserName = "";
+
+    LoginWindow *login = new LoginWindow;
+    login->show();
+    QWidget::close();
+}
+
+// 退出程序
+void MainWindow::exit()
+{
+    app->exit(0);
 }

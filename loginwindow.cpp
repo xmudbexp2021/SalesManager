@@ -42,6 +42,8 @@ void LoginWindow::onExitButtonClick()
  */
 void LoginWindow::onLoginButtonClick()
 {
+    ui->dbAddrLabel->setText("正在鉴权并登录...");
+
     // 获取用户名密码输入
     QString username = ui->usernameEdit->text();
     QString password = ui->passwordEdit->text();

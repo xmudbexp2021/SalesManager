@@ -24,6 +24,7 @@ public:
     void refreshUserTable(QSqlQueryModel *model);
     void refreshSaleTable(QSqlQueryModel *model);
     void refreshStockTable(QSqlQueryModel *model);
+    void refreshDiscountTable(QSqlQueryModel *model);
     void setupTables();
 
 private:
@@ -41,6 +42,7 @@ public slots:
     void onTableChanged();             // 表格数据变更，触发重新渲染
     void onStockButtonClick();        //入库按钮点击事件
     void onSellButtonClick();
+
     // 分类管理页面
     void onNewCategoryButtonClick();
     void onAlterCategoryButtonClick();
@@ -50,6 +52,21 @@ public slots:
     void onCreateUserButtonClick();
     void onModifyUserButtonClick();
     void onDeleteUserButtonClick();
+
+    // 售卖信息页面
+    void onDeleteSelloutButtonClick();
+
+    // 库存管理页面
+    void onDeleteLogButtonClick();
+
+    // 折扣页面
+    void onCreateDiscountButtonClick();
+    void onModifyDiscountButtonClick();
+    void onDeleteDiscountButtonClick();
+
+    // 菜单事件
+    void logout();
+    void exit();
 };
 
 #endif // MAINWINDOW_H
