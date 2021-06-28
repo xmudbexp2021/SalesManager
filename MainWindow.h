@@ -44,6 +44,11 @@ public slots:
     void onNewCategoryButtonClick();
     void onAlterCategoryButtonClick();
     void onDropCategoryButtonClick();
+
+    // 用户管理页面
+    void onCreateUserButtonClick();
+    void onModifyUserButtonClick();
+    void onDeleteUserButtonClick();
 };
 
 #endif // MAINWINDOW_H

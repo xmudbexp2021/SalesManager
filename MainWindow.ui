@@ -69,7 +69,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -334,14 +334,14 @@ selection-background-color: darkgray;
       </property>
       <property name="styleSheet">
        <string notr="true">#newCategoryButton {
-	background: #1890ff;
+	background: #3CB371;
 	border: 0px;
 	border-radius: 3px;
 	color: #fff;
 }
 
 #newCategoryButton:hover {
-	background: rgb(64,169,255);
+	background: #8FBC8F;
 }</string>
       </property>
       <property name="text">
@@ -359,15 +359,15 @@ selection-background-color: darkgray;
       </property>
       <property name="styleSheet">
        <string notr="true">#alterCategoryButton {
-	background: white;
-	border: 0px;
- 	border:2px solid #D3D3D3;
+	background: #fff;
+	border: 2px solid rgb(0, 145, 255);
+	color: rgb(0, 145, 255);
 	border-radius: 3px;
-	color: black;
 }
 
 #alterCategoryButton:hover {
-	background:	#D3D3D3;
+	background: rgb(64,169,255);
+	color: #fff;
 }</string>
       </property>
       <property name="text">
@@ -405,26 +405,13 @@ selection-background-color: darkgray;
      <attribute name="title">
       <string notr="true">用户管理</string>
      </attribute>
-     <widget class="Line" name="line">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>10</y>
-        <width>20</width>
-        <height>501</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
      <widget class="QTableView" name="userTable">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>50</y>
-        <width>371</width>
-        <height>461</height>
+        <y>10</y>
+        <width>701</width>
+        <height>511</height>
        </rect>
       </property>
       <property name="font">
@@ -436,23 +423,107 @@ selection-background-color: darkgray;
        <number>70</number>
       </attribute>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QPushButton" name="createUserButton">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>730</x>
         <y>10</y>
-        <width>111</width>
+        <width>101</width>
         <height>31</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-        <pointsize>11</pointsize>
-       </font>
+      <property name="styleSheet">
+       <string notr="true">#createUserButton {
+	background: #3CB371;
+	border: 0px;
+	border-radius: 3px;
+	color: #fff;
+}
+
+#createUserButton:hover {
+	background: #8FBC8F;
+}</string>
       </property>
       <property name="text">
-       <string>用户列表：</string>
+       <string> 新建用户</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modifyUserButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>50</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#modifyUserButton {
+	background: #fff;
+	border: 2px solid rgb(0, 145, 255);
+	color: rgb(0, 145, 255);
+	border-radius: 3px;
+}
+
+#modifyUserButton:hover {
+	background: rgb(64,169,255);
+	color: #fff;
+}</string>
+      </property>
+      <property name="text">
+       <string>编辑信息</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modifyPermissionButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>90</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#modifyPermissionButton {
+	background: #fff;
+	border: 2px solid rgb(0, 145, 255);
+	color: rgb(0, 145, 255);
+	border-radius: 3px;
+}
+
+#modifyPermissionButton:hover {
+	background: rgb(64,169,255);
+	color: #fff;
+}</string>
+      </property>
+      <property name="text">
+       <string>权限设置</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteUserButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>130</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#deleteUserButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#deleteUserButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
+      </property>
+      <property name="text">
+       <string> 删除用户</string>
       </property>
      </widget>
     </widget>

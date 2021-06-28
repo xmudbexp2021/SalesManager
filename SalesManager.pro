@@ -21,6 +21,7 @@ SOURCES += \
     MainWindow.cpp \
     SQLThread.cpp \
     ServerSetting.cpp \
+    UserEdit.cpp \
     loginwindow.cpp \
     main.cpp \
     utility.cpp
@@ -31,6 +32,7 @@ HEADERS += \
     MainWindow.h \
     SQLThread.h \
     ServerSetting.h \
+    UserEdit.h \
     application.h \
     loginwindow.h
 
@@ -39,6 +41,7 @@ FORMS += \
     GoodDetail.ui \
     MainWindow.ui \
     ServerSetting.ui \
+    UserEdit.ui \
     loginwindow.ui
 
 # Default rules for deployment.
