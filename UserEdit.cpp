@@ -145,7 +145,6 @@ void UserEdit::onSavePermissionButtonClick()
     query.addBindValue(domainName);
     query.addBindValue(typeName);
     query.addBindValue(!opIndex);
-    qDebug() << domainName << typeName << opIndex;
     if (!query.exec()) {
         qDebug() << query.lastError();
         return;
