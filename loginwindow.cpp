@@ -57,7 +57,9 @@ void LoginWindow::onLoginButtonClick()
     QSqlQuery query;
     query.prepare("SELECT password, uid, username, role FROM users WHERE username = ?");
     query.addBindValue(username);
-    query.exec();
+    if (!query.exec()) {
+        createMessageBox("数据库连接失败：" + query.lastError().text());
+    }
 
     // 用户存在，则验证密码
     if (query.next()) {

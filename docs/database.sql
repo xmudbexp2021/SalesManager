@@ -74,7 +74,7 @@ CREATE TABLE goods_sellouts (
     number INT,
     price FLOAT,
     customer_name NCHAR(20),
-    customer_contact NCHAR(20),
+    customer_contact NCHAR(200),
     sell_time DATETIME,
 
     PRIMARY KEY(sid),
