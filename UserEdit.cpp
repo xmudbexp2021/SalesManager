@@ -71,7 +71,7 @@ void UserEdit::renderPermissionOperation()
 void UserEdit::onSelectionChange(int index)
 {
     // 获取当前选择的权限域和权限类型
-    int domainIndex = ui->permissionType->currentIndex();
+    int domainIndex = ui->permissionDomain->currentIndex();
     int typeIndex = ui->permissionType->currentIndex();
 
     QString domainName = domain[domainIndex];
@@ -88,6 +88,18 @@ void UserEdit::onSelectionChange(int index)
 
 void UserEdit::onSavePermissionButtonClick()
 {
+    if (!hasPermission(loginUserID, "user_permissions", "insert")
+            || !hasPermission(loginUserID, "user_permissions", "update")
+            || !hasPermission(loginUserID, "user_permissions", "delete")) {
+        createMessageBox("您无权编辑用户权限！");
+        return;
+    }
+
+    if (currentUid == loginUserID) {
+        createMessageBox("您无法编辑自己的权限！");
+        return;
+    }
+
     // 获取当前选择的权限域和权限类型
     int domainIndex = ui->permissionType->currentIndex();
     int typeIndex = ui->permissionType->currentIndex();
@@ -100,8 +112,24 @@ void UserEdit::onSavePermissionButtonClick()
             typeIndex == 2 ? "update" :
             typeIndex == 3 ? "delete" : "unknown";
 
-    // 删除已设置的权限记录
+    if (!hasPermission(loginUserID, domainName, typeName)) {
+        createMessageBox("您自身没有访问该域的相关类型权限！");
+        return;
+    }
+
     QSqlQuery query;
+    query.prepare("SELECT role FROM users WHERE uid = ?");
+    query.addBindValue(currentUid);
+    if (!query.exec())
+        qDebug() << query.lastError();
+    if (!query.next())
+        return;
+    if ((loginUserRole != 0 && query.value(0).toInt() == 0) || currentUid == 0) {
+        createMessageBox("无法对系统管理员的权限进行修改！");
+        return;
+    }
+
+    // 删除已设置的权限记录
     query.prepare("DELETE FROM user_permissions WHERE uid = ? AND domain = ? AND type = ?");
     query.addBindValue(currentUid);
     query.addBindValue(domainName);
@@ -180,6 +208,16 @@ void UserEdit::onSaveButtonClick()
         targetRole = 3;
 
     if (userAction == "modify") {
+        if (!hasPermission(loginUserID, "users", "update")) {
+            createMessageBox("您无权编辑用户！");
+            return;
+        }
+
+        if (targetRole < loginUserRole) {
+            createMessageBox("不允许创建比当前用户权限更高的用户！");
+            return;
+        }
+
         QSqlQuery query;
         query.prepare("UPDATE users SET username = ?, email = ?, phone = ? WHERE uid = ?");
         query.addBindValue(username);
@@ -198,6 +236,7 @@ void UserEdit::onSaveButtonClick()
             qDebug() << query.lastError();
         if (query.next())
             userRole = query.value(0).toInt();
+
         if (targetRole == userRole) {}
         else if (currentUid == loginUserID || currentUid == 1 || (userRole == 0 && loginUserID != 1)) {
             createMessageBox("不能修改自己的权限或系统管理员的权限！");
@@ -233,6 +272,11 @@ void UserEdit::onSaveButtonClick()
         emit tableChanged();
         QWidget::close();
     } else if (userAction == "add") {
+        if (!hasPermission(loginUserID, "users", "insert")) {
+            createMessageBox("您无权新建用户！");
+            return;
+        }
+
         if (targetRole < loginUserRole) {
             createMessageBox("不允许创建比当前用户权限更高的用户！");
             return;
@@ -274,6 +318,14 @@ void UserEdit::onSaveButtonClick()
         query.addBindValue(email);
         if (!query.exec())
             qDebug() << query.lastError();
+        if (targetRole == 3) {
+            query.prepare("INSERT INTO user_permissions(uid, type, domain, `grant`) "
+                          "VALUES (?, 'select', 'goods_sellout', 1), (?, 'insert', 'goods_sellout', 1)");
+            query.addBindValue(query.lastInsertId());
+            query.addBindValue(query.lastInsertId());
+            if (!query.exec())
+                qDebug() << query.lastError();
+        }
 
         createMessageBox("新建用户成功！");
         emit tableChanged();

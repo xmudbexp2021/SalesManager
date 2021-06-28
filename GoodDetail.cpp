@@ -13,7 +13,7 @@ GoodDetail::GoodDetail(QWidget *parent, int gid) :
     // 渲染商品基础信息
     QSqlQuery query;
     query.prepare("SELECT username, sku, title, subtitle, "
-                  "inventory, restock_value,selling_value, "
+                  "inventory, restock_value, selling_value, "
                   "length, width, height, weight, color "
                   "FROM goods "
                   "LEFT JOIN users ON goods.uid = users.uid "
@@ -44,6 +44,20 @@ GoodDetail::GoodDetail(QWidget *parent, int gid) :
     ui->sizeLabel->setText(length + "×" + width + "×" + height);
     ui->weightLabel->setText(query.value(10).toString());
     ui->colorLabel->setText(query.value(11).toString());
+
+    // 获取折扣价格
+    query.prepare("SELECT discount "
+                  "FROM discounts "
+                  "WHERE gid = ? "
+                  "AND start_time <= CURRENT_TIMESTAMP "
+                  "AND end_time >= CURRENT_TIMESTAMP");
+    query.addBindValue(gid);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+    }
+    if (query.next()) {
+        ui->customLabel->setText(query.value(0).toString());
+    }
 
     // 渲染图片
     query.prepare("SELECT pid, pictures "

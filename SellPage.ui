@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>380</height>
+    <width>678</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="font">
@@ -35,7 +35,7 @@ selection-background-color: darkgray;
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>101</width>
+     <width>131</width>
      <height>21</height>
     </rect>
    </property>
@@ -52,10 +52,10 @@ selection-background-color: darkgray;
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>59</y>
-     <width>71</width>
-     <height>21</height>
+     <x>240</x>
+     <y>60</y>
+     <width>81</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -70,7 +70,7 @@ selection-background-color: darkgray;
   <widget class="QLineEdit" name="nameLine">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>320</x>
      <y>60</y>
      <width>113</width>
      <height>20</height>
@@ -85,7 +85,7 @@ selection-background-color: darkgray;
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>61</width>
+     <width>91</width>
      <height>16</height>
     </rect>
    </property>
@@ -101,7 +101,7 @@ selection-background-color: darkgray;
   <widget class="QLineEdit" name="gidLine">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>100</x>
      <y>60</y>
      <width>113</width>
      <height>20</height>
@@ -114,7 +114,7 @@ selection-background-color: darkgray;
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>480</x>
      <y>60</y>
      <width>61</width>
      <height>20</height>
@@ -126,13 +126,13 @@ selection-background-color: darkgray;
     </font>
    </property>
    <property name="text">
-    <string>操 作 用 户</string>
+    <string>操作用户</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="userLine">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>550</x>
      <y>60</y>
      <width>113</width>
      <height>20</height>
@@ -142,7 +142,7 @@ selection-background-color: darkgray;
   <widget class="QSpinBox" name="sellNumBox">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>100</x>
      <y>110</y>
      <width>113</width>
      <height>22</height>
@@ -160,9 +160,9 @@ selection-background-color: darkgray;
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>110</y>
-     <width>61</width>
+     <width>71</width>
      <height>21</height>
     </rect>
    </property>
@@ -172,13 +172,13 @@ selection-background-color: darkgray;
     </font>
    </property>
    <property name="text">
-    <string>售 卖 数 量</string>
+    <string>售卖数量</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>480</x>
      <y>110</y>
      <width>61</width>
      <height>21</height>
@@ -190,13 +190,13 @@ selection-background-color: darkgray;
     </font>
    </property>
    <property name="text">
-    <string>售 卖 价 格</string>
+    <string>售卖价格</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="priceLine">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>550</x>
      <y>110</y>
      <width>113</width>
      <height>20</height>
@@ -206,7 +206,7 @@ selection-background-color: darkgray;
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>240</x>
      <y>110</y>
      <width>61</width>
      <height>20</height>
@@ -224,7 +224,7 @@ selection-background-color: darkgray;
   <widget class="QLineEdit" name="skuLine">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>320</x>
      <y>110</y>
      <width>113</width>
      <height>20</height>
@@ -265,7 +265,7 @@ selection-background-color: darkgray;
     </font>
    </property>
    <property name="text">
-    <string>顾 客 姓 名</string>
+    <string>顾客姓名</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="customLine">
@@ -281,7 +281,7 @@ selection-background-color: darkgray;
   <widget class="QLabel" name="label_10">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>370</x>
      <y>240</y>
      <width>61</width>
      <height>21</height>
@@ -293,13 +293,13 @@ selection-background-color: darkgray;
     </font>
    </property>
    <property name="text">
-    <string>联 系 方 式</string>
+    <string>联系方式</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="phoneLine">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>440</x>
      <y>240</y>
      <width>221</width>
      <height>20</height>
@@ -311,7 +311,7 @@ selection-background-color: darkgray;
     <rect>
      <x>0</x>
      <y>160</y>
-     <width>641</width>
+     <width>671</width>
      <height>21</height>
     </rect>
    </property>
@@ -348,7 +348,7 @@ selection-background-color: darkgray;
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>350</x>
      <y>320</y>
      <width>75</width>
      <height>23</height>

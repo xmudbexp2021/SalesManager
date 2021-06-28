@@ -96,5 +96,4 @@
 | uid | 用户 ID | int | 外键 |
 | start_time | 开始日期 | datetime |  |
 | end_time | 结束日期 | endtime | |
-| amount | 数量阈值 | float | |
 | discount | 折扣价格 | float | |

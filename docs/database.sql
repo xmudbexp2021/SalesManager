@@ -71,7 +71,7 @@ CREATE TABLE goods_sellouts (
     sid INT NOT NULL AUTO_INCREMENT,
     gid INT,
     uid INT,
-    number FLOAT,
+    number INT,
     price FLOAT,
     customer_name NCHAR(20),
     customer_contact NCHAR(20),
@@ -88,7 +88,7 @@ CREATE TABLE goods_logs (
     gid INT,
     uid INT,
     type INT,
-    number FLOAT,
+    number INT,
     time DATETIME,
 
     PRIMARY KEY(log_id),
@@ -115,7 +115,6 @@ CREATE TABLE discounts (
     uid INT,
     start_time DATETIME,
     end_time DATETIME,
-    amount FLOAT,
     discount FLOAT,
 
     PRIMARY KEY(did),

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>854</width>
-    <height>594</height>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,7 +69,7 @@ QTabBar::tab:selected {
 </string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -141,7 +141,7 @@ QTabBar::tab:selected {
       <property name="geometry">
        <rect>
         <x>750</x>
-        <y>210</y>
+        <y>250</y>
         <width>75</width>
         <height>30</height>
        </rect>
@@ -352,6 +352,33 @@ selection-background-color: darkgray;
       </property>
       <property name="text">
        <string>售卖</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="createDiscountButton">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>210</y>
+        <width>75</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#createDiscountButton {
+	background: #fff;
+	border: 2px solid rgb(0, 145, 255);
+	color: rgb(0, 145, 255);
+	border-radius: 3px;
+}
+
+#createDiscountButton:hover {
+	background: rgb(64,169,255);
+	color: #fff;
+}
+</string>
+      </property>
+      <property name="text">
+       <string>新建折扣</string>
       </property>
      </widget>
     </widget>
@@ -586,11 +613,37 @@ selection-background-color: darkgray;
      <widget class="QTableView" name="saleTable">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>741</width>
-        <height>481</height>
+        <width>701</width>
+        <height>511</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteSelloutButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>10</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#deleteSelloutButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#deleteSelloutButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
+      </property>
+      <property name="text">
+       <string>删除记录</string>
       </property>
      </widget>
     </widget>
@@ -601,11 +654,37 @@ selection-background-color: darkgray;
      <widget class="QTableView" name="stockTable">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>741</width>
-        <height>481</height>
+        <width>701</width>
+        <height>511</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteLogButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>10</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#deleteLogButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#deleteLogButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
+      </property>
+      <property name="text">
+       <string>删除记录</string>
       </property>
      </widget>
     </widget>
@@ -616,11 +695,63 @@ selection-background-color: darkgray;
      <widget class="QTableView" name="discountTable">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>741</width>
-        <height>481</height>
+        <width>701</width>
+        <height>511</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="modifyDiscountButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>10</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#modifyDiscountButton {
+	background: #fff;
+	border: 2px solid rgb(0, 145, 255);
+	color: rgb(0, 145, 255);
+	border-radius: 3px;
+}
+
+#modifyDiscountButton:hover {
+	background: rgb(64,169,255);
+	color: #fff;
+}</string>
+      </property>
+      <property name="text">
+       <string>编辑折扣</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteDiscountButton">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>50</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#deleteDiscountButton {
+	color:#FF4500;
+	background:	white;
+ 	border:2px solid #FF4500;
+	border-radius: 3px;
+}
+
+#deleteDiscountButton:hover {
+	background:	#FF4500;
+	color:white;
+}</string>
+      </property>
+      <property name="text">
+       <string>删除折扣</string>
       </property>
      </widget>
     </widget>
@@ -632,10 +763,48 @@ selection-background-color: darkgray;
      <x>0</x>
      <y>0</y>
      <width>854</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuCurrentUser">
+    <property name="title">
+     <string>当前登录用户</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuLogout">
+    <property name="title">
+     <string>注销</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>退出</string>
+    </property>
+   </widget>
+   <addaction name="menuCurrentUser"/>
+   <addaction name="menuLogout"/>
+   <addaction name="menuExit"/>
   </widget>
+  <action name="actionaazhe">
+   <property name="text">
+    <string>Logout</string>
+   </property>
+  </action>
+  <action name="actionLogout">
+   <property name="text">
+    <string>注销当前用户</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>退出程序</string>
+   </property>
+  </action>
+  <action name="actionCurrentUser">
+   <property name="text">
+    <string>当前登录用户：</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
