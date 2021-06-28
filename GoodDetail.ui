@@ -335,32 +335,6 @@ text-align: right;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="inButton">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>380</y>
-      <width>85</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>进货</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="outButton">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>380</y>
-      <width>85</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>售货</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="closeButton">
     <property name="geometry">
      <rect>
