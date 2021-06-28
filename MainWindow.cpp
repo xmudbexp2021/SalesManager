@@ -3,6 +3,7 @@
 
 #include "AddGoodItem.h"
 #include "GoodDetail.h"
+#include "UserEdit.h"
 #include "SellPage.h"
 
 int loginUserID;
@@ -33,6 +34,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->alterCategoryButton, SIGNAL(clicked()), this, SLOT(onAlterCategoryButtonClick()));
     connect(ui->dropCategoryButton, SIGNAL(clicked()), this, SLOT(onDropCategoryButtonClick()));
 
+    //// 用户管理 页面
+    connect(ui->createUserButton, SIGNAL(clicked()), this, SLOT(onCreateUserButtonClick()));
+    connect(ui->modifyUserButton, SIGNAL(clicked()), this, SLOT(onModifyUserButtonClick()));
+    connect(ui->modifyPermissionButton, SIGNAL(clicked()), this, SLOT(onModifyUserButtonClick()));
+    connect(ui->deleteUserButton, SIGNAL(clicked()), this, SLOT(onDeleteUserButtonClick()));
 
     // 绑定表格点击事件
     connect(ui->typeTable, SIGNAL(clicked(const QModelIndex&)), this, SLOT(onApplyCategoryFilter(const QModelIndex&)));
@@ -361,11 +367,18 @@ void MainWindow::refreshUserTable(QSqlQueryModel *model)
 {
     model->setHeaderData(0,Qt::Horizontal,tr("用户ID"));
     model->setHeaderData(1,Qt::Horizontal,tr("用户名"));
-    model->setHeaderData(2,Qt::Horizontal,tr("权限"));
-    model->setHeaderData(3,Qt::Horizontal,tr("电话"));
-    model->setHeaderData(4,Qt::Horizontal,tr("邮箱"));
+    model->setHeaderData(2,Qt::Horizontal,tr("用户角色"));
+    model->setHeaderData(3,Qt::Horizontal,tr("联系电话"));
+    model->setHeaderData(4,Qt::Horizontal,tr("联系邮箱"));
     model->setHeaderData(5,Qt::Horizontal,tr("上次登陆"));
     ui->userTable->setModel(model);
+    ui->userTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->userTable->setColumnWidth(1, 100);
+    ui->userTable->setColumnWidth(2, 150);
+    ui->userTable->setColumnWidth(3, 150);
+    ui->userTable->setColumnWidth(4, 150);
+    ui->userTable->setColumnWidth(5, 200);
+    ui->userTable->verticalHeader()->hide();
     ui->userTable->show();
 }
 
@@ -406,7 +419,10 @@ void MainWindow::setupTables()
 
     //查询goods表中各信息并刷新resultTable
     QSqlQueryModel *modelResultFirst = new QSqlQueryModel;
-    modelResultFirst->setQuery("select gid,gno,title,categories.name,sku,subtitle,inventory,restock_value,selling_value,length,width,height,weight,color from goods,categories where goods.cid = categories.cid");
+    modelResultFirst->setQuery("select gid, gno, title, name, sku, subtitle, "
+                               "inventory, restock_value, selling_value, "
+                               "length, width, height, weight, color "
+                               "from goods  left join categories on goods.cid = categories.cid");
     refreshResultTable(modelResultFirst);
 
     //查询种类信息并刷新typeManagerTable
@@ -421,7 +437,13 @@ void MainWindow::setupTables()
 
     //查询用户信息并刷新userTable
     QSqlQueryModel *modelUserFirst = new QSqlQueryModel;
-    modelUserFirst->setQuery("select uid,username,role,phone,email,last_login from users");
+    modelUserFirst->setQuery("select uid, username, "
+                             "case role "
+                                "when 0 then '系统管理员' "
+                                "when 1 then '库存经理' "
+                                "when 2 then '人力资源经理' "
+                                "when 3 then '普通用户' end as roleStr, "
+                             "phone, email, last_login from users");
     refreshUserTable(modelUserFirst);
 
     //查询售卖信息并刷新 saleTable
@@ -527,6 +549,75 @@ void MainWindow::onDropCategoryButtonClick()
         if (!query.exec())
             qDebug() << query.lastError();
         createMessageBox("分类已删除！");
+        setupTables();
+    }
+}
+
+
+/**
+ * 用户管理 / 权限管理页面
+ */
+void MainWindow::onCreateUserButtonClick()
+{
+    UserEdit *userEditPage = new UserEdit(this, -1, "add");
+    connect(userEditPage, SIGNAL(tableChanged()), this, SLOT(onTableChanged()));
+    userEditPage->show();
+}
+
+void MainWindow::onModifyUserButtonClick()
+{
+    if (!ui->userTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中选择一个用户操作。");
+        return;
+    }
+
+    QModelIndexList selection = ui->userTable->selectionModel()->selectedRows();
+    int rowId = selection.at(0).row();
+    int uid = ui->userTable->model()->data(ui->userTable->model()->index(rowId, 0)).toInt();
+
+    UserEdit *userEditPage = new UserEdit(this, uid);
+    connect(userEditPage, SIGNAL(tableChanged()), this, SLOT(onTableChanged()));
+    userEditPage->show();
+}
+
+void MainWindow::onDeleteUserButtonClick()
+{
+    if (!ui->userTable->selectionModel()->hasSelection()) {
+        createMessageBox("需要从列表中选择一个用户删除！");
+        return;
+    }
+
+    QModelIndexList selection = ui->userTable->selectionModel()->selectedRows();
+
+    int rowId = selection.at(0).row();
+    int uid = ui->userTable->model()->data(ui->userTable->model()->index(rowId, 0)).toInt();
+
+    if (hasPermission(loginUserID, "users", "delete") != 1) {
+        createMessageBox("您无权删除用户！");
+        return;
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT role FROM users WHERE uid = ?");
+    query.addBindValue(uid);
+    if (!query.exec() || !query.next())
+        qDebug() << query.lastError();
+
+    if ((query.value(0).toInt() == 0 && loginUserID != 1) || uid == 1) {
+        createMessageBox("您无权删除管理员用户！");
+        return;
+    }
+
+    QMessageBox::StandardButton reply =  QMessageBox::question(NULL,
+        "删除用户确认", "确定要删除用户吗？删除用户会同时删除用户创建的所有商品和售卖记录等。", QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        query.prepare("DELETE FROM users WHERE uid = ?");
+        query.addBindValue(uid);
+        if (!query.exec())
+            qDebug() << query.lastError();
+        createMessageBox("删除用户成功！");
+
         setupTables();
     }
 }

@@ -72,9 +72,6 @@ void LoginWindow::onLoginButtonClick()
         res = hash.result();
         inputMd5 = res.toHex();
 
-        qDebug() << "MD5 of password in DB: " << passwordMd5;
-        qDebug() << "MD5 of password inputed: " << inputMd5;
-
         if (passwordMd5 == inputMd5) {
             // 更新上次登录时间
             QDateTime currentTime = QDateTime::currentDateTime();

@@ -35,4 +35,7 @@ extern QString loginUserName;
 
 // 创建提示框
 void createMessageBox(QString content);
+
+// 查询用户是否具有权限
+int hasPermission(int uid, QString domain, QString type);
 #endif

@@ -22,6 +22,7 @@ SOURCES += \
     SQLThread.cpp \
     SellPage.cpp \
     ServerSetting.cpp \
+    UserEdit.cpp \
     loginwindow.cpp \
     main.cpp \
     utility.cpp
@@ -33,6 +34,7 @@ HEADERS += \
     SQLThread.h \
     SellPage.h \
     ServerSetting.h \
+    UserEdit.h \
     application.h \
     loginwindow.h
 
@@ -42,6 +44,7 @@ FORMS += \
     MainWindow.ui \
     SellPage.ui \
     ServerSetting.ui \
+    UserEdit.ui \
     loginwindow.ui
 
 # Default rules for deployment.

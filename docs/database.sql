@@ -52,8 +52,8 @@ CREATE TABLE goods (
     color NCHAR(20),
 
     PRIMARY KEY(gid),
-    FOREIGN KEY(cid) REFERENCES categories(cid),
-    FOREIGN KEY(uid) REFERENCES users(uid)
+    CONSTRAINT goods_fk1 FOREIGN KEY(cid) REFERENCES categories(cid) ON DELETE CASCADE,
+    CONSTRAINT goods_fk2 FOREIGN KEY(uid) REFERENCES users(uid)  ON DELETE CASCADE
 );
 
 -- 商品图片 (pictures)
@@ -63,7 +63,7 @@ CREATE TABLE pictures (
     pictures TEXT,
 
     PRIMARY KEY(pid),
-    FOREIGN KEY(gid) REFERENCES goods(gid)
+    CONSTRAINT pictures_fk1 FOREIGN KEY(gid) REFERENCES goods(gid)  ON DELETE CASCADE
 );
 
 -- 商品卖出信息表 (goods_sellouts)
@@ -78,8 +78,8 @@ CREATE TABLE goods_sellouts (
     sell_time DATETIME,
 
     PRIMARY KEY(sid),
-    FOREIGN KEY(gid) REFERENCES goods(gid),
-    FOREIGN KEY(uid) REFERENCES users(uid)
+    CONSTRAINT gs_fk1 FOREIGN KEY(gid) REFERENCES goods(gid) ON DELETE CASCADE,
+    CONSTRAINT gs_fk2 FOREIGN KEY(uid) REFERENCES users(uid) ON DELETE CASCADE
 );
 
 -- 商品变动信息表 (good_logs)
@@ -92,8 +92,8 @@ CREATE TABLE goods_logs (
     time DATETIME,
 
     PRIMARY KEY(log_id),
-    FOREIGN KEY(gid) REFERENCES goods(gid),
-    FOREIGN KEY(uid) REFERENCES users(uid)
+    CONSTRAINT gl_fk1 FOREIGN KEY(gid) REFERENCES goods(gid) ON DELETE CASCADE,
+    CONSTRAINT gl_fk2 FOREIGN KEY(uid) REFERENCES users(uid) ON DELETE CASCADE
 );
 
 -- 用户权限表 (user_permissions)
@@ -102,9 +102,10 @@ CREATE TABLE user_permissions (
     uid INT,
     type CHAR(50),
     domain CHAR(50),
+    `grant` INT,
 
     PRIMARY KEY(pid),
-    FOREIGN KEY(uid) REFERENCES users(uid)
+    CONSTRAINT up_fk1 FOREIGN KEY(uid) REFERENCES users(uid) ON DELETE CASCADE
 );
 
 -- 商品折扣策略
@@ -118,8 +119,8 @@ CREATE TABLE discounts (
     discount FLOAT,
 
     PRIMARY KEY(did),
-    FOREIGN KEY(gid) REFERENCES goods(gid),
-    FOREIGN KEY(uid) REFERENCES users(uid)
+    CONSTRAINT discounts_fk1 FOREIGN KEY(gid) REFERENCES goods(gid) ON DELETE CASCADE,
+    CONSTRAINT discounts_fk2 FOREIGN KEY(uid) REFERENCES users(uid) ON DELETE CASCADE
 );
 
 -- 更新库存量的触发器
@@ -136,10 +137,10 @@ CREATE TRIGGER decreaseInventory AFTER INSERT ON goods_sellouts FOR EACH ROW
     WHERE gid = NEW.gid;
 
 -- 更新商品分类计数器的触发器
-DROP TRIGGER IF EXISTS categoriesNumberUpdater;
-CREATE TRIGGER categoriesNumberUpdater AFTER UPDATE ON goods FOR EACH ROW
+DROP TRIGGER IF EXISTS categoriesNumberInserter;
+CREATE TRIGGER categoriesNumberInserter AFTER INSERT ON goods FOR EACH ROW
     UPDATE categories
-    SET number = number - OLD.inventory + NEW.inventory
+    SET number = number + 1
     WHERE cid = NEW.cid;
 
 -- 创建默认管理员用户, 用户名 admin, 密码 admin
@@ -147,3 +148,4 @@ INSERT INTO users (username, password, role) VALUES ('admin', '21232f297a57a5a74
 
 -- 创建默认分类
 INSERT INTO categories (cid, name, number) VALUES (0, '未分类', 0);
+UPDATE categories SET cid = 0 WHERE cid = 1;
